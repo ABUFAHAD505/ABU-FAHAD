@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>👤 من أنا - تأثير 3D متحرك</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+  body, html {
+    margin: 0; padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Cairo', sans-serif;
+    background: radial-gradient(circle at center, #003f6e, #000000 90%);
+    color: #a0e9ff;
+    perspective: 1000px;
+    user-select: none;
+  }
+
+  .stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('https://media.discordapp.net/attachments/1290792767932596332/1372419032753504276/5.jpeg?ex=6826b453&is=682562d3&hm=17c87851b671655a5134602757fea033765f37f6e4e9a9bfbc2245dac5457409&=&format=webp&width=537&height=958') repeat;
+    animation: starMove 150s linear infinite;
+    opacity: 0.25;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  @keyframes starMove {
+    from {background-position: 0 0;}
+    to {background-position: 3000px 3000px;}
+  }
+
+  .container {
+    position: relative;
+    z-index: 10;
+    max-width: 700px;
+    background: linear-gradient(135deg, #041f47cc, #002b6acc);
+    border-radius: 30px;
+    box-shadow:
+      0 0 25px #00caffaa,
+      inset 0 0 40px #004080cc;
+    padding: 35px 45px;
+    backdrop-filter: blur(14px);
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+    margin: auto;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: text;
+    cursor: default;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 35px;
+    color: #00ccff;
+    text-align: center;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    user-select: none;
+    text-shadow:
+      0 0 15px #00ccff,
+      0 0 30px #0066ff,
+      0 0 60px #00ccff;
+    animation: glowText 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowText {
+    from {
+      text-shadow:
+        0 0 15px #006cbf,
+        0 0 40px #006cbf,
+        0 0 60px #006cbf;
+      color: #023444;
+    }
+    to {
+      text-shadow:
+        0 0 30px #01474e,
+        0 0 60px #006cbf,
+        0 0 90px #01474e;
+      color: #006cbf;
+    }
+  }
+
+  .about-box {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #a0e9ff;
+    background: linear-gradient(145deg, #01224add, #003a89cc);
+    padding: 30px 40px;
+    border-radius: 30px;
+    box-shadow:
+      0 0 35px #041f36,
+      inset 0 0 35px #005ea8cc;
+    backdrop-filter: blur(18px);
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    transition: box-shadow 0.5s ease;
+    user-select: text;
+  }
+  .about-box:hover {
+    box-shadow:
+      0 0 50px #00ccff,
+      inset 0 0 50px #00ccff;
+  }
+
+  nav {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    flex-wrap: wrap;
+    z-index: 20;
+  }
+
+  nav a {
+    position: relative;
+    background: linear-gradient(135deg, #041f36, #041f36);
+    padding: 14px 38px;
+    border-radius: 50px;
+    color: #00ccff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    box-shadow:
+      0 0 20px #00ccff,
+      0 6px 18px rgba(0, 170, 255, 0.8);
+    transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+    overflow: hidden;
+    cursor: pointer;
+    letter-spacing: 0.08em;
+    user-select: none;
+    min-width: 140px;
+    text-align: center;
+  }
+
+  nav a::before {
+    content: "";
+    position: absolute;
+    top: -40%;
+    left: -50%;
+    width: 250%;
+    height: 200%;
+    background: linear-gradient(120deg, #00ccff 0%, rgba(255,255,255,0.5) 50%, #00ccff 100%);
+    transform: rotate(25deg);
+    animation: shine 3.5s linear infinite;
+    pointer-events: none;
+    opacity: 0.7;
+    filter: drop-shadow(0 0 8px #00caff);
+    border-radius: 50px;
+    z-index: 1;
+  }
+
+  nav a:hover::before {
+    opacity: 1;
+  }
+
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%) rotate(25deg);
+    }
+    100% {
+      transform: translateX(150%) rotate(25deg);
+    }
+  }
+
+  nav a:hover {
+    background: linear-gradient(135deg, #00ccff, #0066ff);
+    box-shadow:
+      0 0 35px #00ccff,
+      0 8px 22px rgba(0, 187, 255, 0.95);
+    transform: translateY(-5px) scale(1.08);
+    z-index: 10;
+  }
+
+  @media (max-width: 700px) {
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+    }
+    .about-box {
+      font-size: 16px;
+      padding: 25px 20px;
+    }
+    nav a {
+      padding: 12px 28px;
+      font-size: 1rem;
+      min-width: 110px;
+    }
+  }
+</style>
+</head>
+<body>
+  <audio autoplay loop hidden>
+  <source src="audio.mp3" type="audio/mpeg">
+  متصفحك لا يدعم تشغيل الصوت.
+</audio>
+
+  <div class="stars"></div>
+  <div class="container" id="container">
+    <h1>👤 من أنا</h1>
+    <div class="about-box">
+      <p>
+        مرحباً بك في عالمي الرقمي!<br><br>
+        أنا مطوّر ومصمم مواقع إلكترونية متحمس للابتكار، أدمج بين الفن والتقنية لصنع تجارب فريدة.<br><br>
+        أستخدم أحدث الأدوات والتقنيات لبناء واجهات جذابة وتفاعلية تجعل المستخدم يشعر وكأنه في عالم آخر.<br><br>
+        أؤمن بأن كل موقع هو رحلة يستحق أن تكون مميزة، وأنا هنا لأرسم لك تلك الرحلة بألوان الفضاء وروعة النجوم.
+      </p>
+    </div>
+    <nav>
+      <a href="index.html">🏠 الرئيسية</a>
+      <a href="skills.html">🛠 المهارات</a>
+      <a href="projects.html">💼 الأعمال</a>
+      <a href="services.html">🚀 الخدمات</a>
+      <a href="contact.html">📬 تواصل معي</a>
+    </nav>
+  </div>
+
+ <script>
+const container = document.getElementById('container');
+
+window.addEventListener('mousemove', (e) => {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+
+  const deltaX = (e.clientX - centerX) / centerX;
+  const deltaY = (e.clientY - centerY) / centerY;
+
+  const rotateX = deltaY * 15;
+  const rotateY = deltaX * 15;
+
+  container.style.transform = `translate(-50%, -50%) rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+});
+
+window.addEventListener('mouseout', () => {
+  container.style.transform = 'translate(-50%, -50%) rotateX(0deg) rotateY(0deg)';
+});
+</script>
+
+<script src="audio.js"></script>
+

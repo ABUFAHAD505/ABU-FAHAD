@@ -1,0 +1,81 @@
+<!-- player.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>صوت الخلفية</title>
+</head>
+<body style="margin:0">
+  <audio id="bgAudio" src="sound.mp3" autoplay loop></audio>
+  <script>
+    const audio = document.getElementById("bgAudio");
+    audio.volume = 0.5;
+
+    // تحكم بالصوت من الصفحات الأخرى
+    window.addEventListener("message", (e) => {
+      const { command, value } = e.data;
+      if (command === "play") audio.play();
+      if (command === "pause") audio.pause();
+      if (command === "volume") audio.volume = value;
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>مشغل الصوت</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Cairo', sans-serif;
+      text-align: center;
+      padding-top: 30px;
+    }
+
+    .audio-controls {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="bgAudio" autoplay loop>
+    <source src="sound.mp3" type="audio/mpeg">
+    متصفحك لا يدعم تشغيل الصوت.
+  </audio>
+
+  <div class="audio-controls">
+    <button onclick="toggleAudio()">تشغيل / إيقاف</button><br><br>
+    <input type="range" min="0" max="1" step="0.01" value="0.5" onchange="setVolume(this.value)">
+  </div>
+
+  <script>
+    const audio = document.getElementById("bgAudio");
+
+    function toggleAudio() {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+
+    function setVolume(value) {
+      audio.volume = value;
+    }
+
+    // بدء الصوت تلقائياً (أغلب المتصفحات تحتاج تفاعل أول مرة فقط)
+    audio.volume = 0.5;
+    window.onload = () => {
+      audio.play().catch(() => {
+        // بعض المتصفحات تمنع التشغيل التلقائي
+      });
+    };
+  </script>
+
+</body>
+</html>
